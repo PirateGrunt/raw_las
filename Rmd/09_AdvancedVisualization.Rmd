@@ -214,30 +214,30 @@ library(choroplethrMaps)
 mapData <- subset(StateExperience, PolicyYear == 2010)
 mapData$value <- mapData$NumClaims
 mapData$region <- mapData$Fullname
-state_choropleth(mapData)
+# state_choropleth(mapData)
 ```
 
 ## Choropleths the harder way
 
 ```{r}
-states_map <- map_data("state")
-
-plt <- ggplot(subset(StateExperience, PolicyYear == 2010), aes(map_id = Fullname))
-plt <- plt + geom_map(aes(fill = NumClaims), color = "black", map = states_map)
-plt <- plt + expand_limits(x = states_map$long, y = states_map$lat)
-plt <- plt + coord_map()
-plt
+# states_map <- map_data("state")
+# 
+# plt <- ggplot(subset(StateExperience, PolicyYear == 2010), aes(map_id = Fullname))
+# plt <- plt + geom_map(aes(fill = NumClaims), color = "black", map = states_map)
+# plt <- plt + expand_limits(x = states_map$long, y = states_map$lat)
+# plt <- plt + coord_map()
+# plt
 ```
 
 ## Choropleths the really hard way
 
 ```{r }
-plt <- ggplot(StateExperience, aes(map_id = Fullname))
-plt <- plt + geom_map(aes(fill = NumClaims), color = "black", map = states_map)
-plt <- plt + expand_limits(x = states_map$long, y = states_map$lat)
-plt <- plt + facet_wrap( ~ PolicyYear)
-plt <- plt + coord_map()
-plt
+# plt <- ggplot(StateExperience, aes(map_id = Fullname))
+# plt <- plt + geom_map(aes(fill = NumClaims), color = "black", map = states_map)
+# plt <- plt + expand_limits(x = states_map$long, y = states_map$lat)
+# plt <- plt + facet_wrap( ~ PolicyYear)
+# plt <- plt + coord_map()
+# plt
 
 ```
 

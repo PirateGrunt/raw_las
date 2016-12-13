@@ -22,7 +22,8 @@ op <- par(no.readonly = TRUE)
 
 ## Load Data
 ```{r}
-prem <- read.csv('c:/home/git/las2015/Data/prem.csv')
+setwd('c:/home/git/raw_las/')
+prem <- read.csv('./data/prem.csv')
 prem
 ```
 

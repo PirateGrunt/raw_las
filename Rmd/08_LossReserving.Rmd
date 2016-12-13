@@ -40,13 +40,13 @@ development result as required under Solvency II.
 ## Load some data
 Load Sch P data from http://www.casact.org/research/index.cfm?fa=loss_reserves_data
 ```{r}
-asl17g <- read.csv('http://www.casact.org/research/reserve_data/othliab_pos.csv')
-names(asl17g)
+data(othliab, package = 'raw')
+names(othliab)
 ```
 
 
 
-## Fields in asl17g
+## Fields in othliab
 Field               | Description
 ------------------- | ------------------
 GRCODE              | NAIC company code (including insurer groups and single insurers)
@@ -69,7 +69,7 @@ Single              | 1 indicates a single entity, 0 indicates a group insurer
 Take a moment to invesitgate the data yourself.  Some suggestions...
 ```{r, eval = FALSE}
 # What GROUPs are here?
-sort(unique(asl17g$GRNAME))
+sort(unique(othliab$GRNAME))
 ```
 * How many groups are there?
 * What is a unique key on the data?  How can one prove it?
@@ -81,17 +81,17 @@ sort(unique(asl17g$GRNAME))
 ## Answers
 ```{r}
 # How many groups are there?
-length(unique(asl17g$GRNAME))
+length(unique(othliab$GRNAME))
 
 # What is a unique key on the data?
-nrow(asl17g)
-nrow(unique(asl17g[, c('GRCODE', 'AccidentYear', 'DevelopmentYear')]))
-nrow(unique(asl17g[, c('GRCODE', 'AccidentYear', 'DevelopmentLag')]))
-table(asl17g[, c('AccidentYear', 'DevelopmentYear')])
+nrow(othliab)
+nrow(unique(othliab[, c('GRCODE', 'AccidentYear', 'DevelopmentYear')]))
+nrow(unique(othliab[, c('GRCODE', 'AccidentYear', 'DevelopmentLag')]))
+table(othliab[, c('AccidentYear', 'DevelopmentYear')])
 
 # How would you calculate the total premium for ASL 17 by accident year?
 aggregate(
-  data = asl17g[asl17g$DevelopmentYear == 1997, ],
+  data = othliab[othliab$DevelopmentYear == 1997, ],
   EarnedPremDIR_h1 ~ AccidentYear,
   FUN = sum
 )
@@ -104,8 +104,8 @@ What questions did you ask?
 Aggregate and clean up the data a little.
 ```{r}
 asl17 <- aggregate(
-  x = asl17g[, c("IncurLoss_h1", "CumPaidLoss_h1", "BulkLoss_h1", "EarnedPremDIR_h1")], 
-  by = asl17g[, c('AccidentYear', 'DevelopmentYear', 'DevelopmentLag')], 
+  x = othliab[, c("IncurLoss_h1", "CumPaidLoss_h1", "BulkLoss_h1", "EarnedPremDIR_h1")], 
+  by = othliab[, c('AccidentYear', 'DevelopmentYear', 'DevelopmentLag')], 
   FUN = sum
 )
 names(asl17)
@@ -274,8 +274,12 @@ MunichChainLadder(tri.pd, tri.inc)
 
 
 ## Plot Munich Chain Ladder
-```{r}
-plot(MunichChainLadder(tri.pd, tri.inc))
+```{r, fig.align}
+# [ALR Dec 13, 2016]
+# How to get past error "figure margins too large"
+#
+#   plot(MunichChainLadder(tri.pd, tri.inc))
+#
 ```
 
 

@@ -76,7 +76,7 @@ Lets add the conference and division names to the list and turn it into a data f
 division<-names(nflTables)[2:9]
 conference<-c(rep("AFC",4),rep("NFC",5))
 
-nflTables<-lapply(2:9,function(i) 
+nflTables<-lapply(2:5,function(i) 
   cbind(conference[i],division[i],nflTables[[i]][,1:7]))
 
 length(nflTables)
