@@ -2,6 +2,6 @@ slidy_presentation:
   widescreen: false 
   css: custom.css
   duration: 45
-  footer: Copyright (c) 2015 Adam Rich, Kevin Burke, Brian A. Fannin
+  footer: Copyright (c) 2016 Kevin Burke, Brian A. Fannin, Adam L. Rich
 beamer_presentation:
     colortheme: dolphin
